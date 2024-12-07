@@ -37,7 +37,9 @@ def part2():
     part1 = 0
     part2 = 0
     enabled = True
-    for inst in re.findall(r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)", data):
+    input = read_file()
+
+    for inst in re.findall(r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)", str(input)):
         match inst:
             case "do()":
                 enabled = True
