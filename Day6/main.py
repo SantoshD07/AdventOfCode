@@ -53,6 +53,7 @@ def part1():
 
 
     print(part1+len(patrol_map['X']))
+    print(patrol_map['X'])
 
 
 if __name__ == '__main__':
