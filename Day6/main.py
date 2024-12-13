@@ -41,7 +41,7 @@ def part1():
             r += dr
             c += dc
 
-    print(len(patrol_map))
+    print(patrol_map['X'])
 
 
 if __name__ == '__main__':
