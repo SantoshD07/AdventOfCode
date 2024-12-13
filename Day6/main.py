@@ -13,7 +13,7 @@ def read_file():
 
 lines = read_file()
 obstacle_map = defaultdict(set)
-patrol_map = defaultdict(set)
+patrol_map = set()
 
 for r, row in enumerate(lines):
     for c, val in enumerate(row):
@@ -27,32 +27,21 @@ print(obstacle_map)
 def part1():
     part1 = 1
     maxr = len(lines)
-    maxc = len(lines[0]) - 1
+    maxc = len(lines[0])
     r, c = start_r, start_c
-    print(start_r+1, start_c+1)
     dr, dc = -1, 0
 
-    while (r <maxr and c <maxc and r>0 and c>0):
-        r, c = r + dr, c + dc
-
-        if (r,c) not in obstacle_map['#']:
-            if (r,c) not in patrol_map['X']:
-                patrol_map['X'].add((r,c))
-            print(r+1, c+1)
+    while True:
+        patrol_map.add((r, c))
+        if not (0 <= r + dr < maxr and 0 <= c + dc < maxc):
+            break
+        elif (r + dr, c + dc) in obstacle_map['#']:
+            dc, dr = -dr, dc
         else:
-            print("Change direction", r, c)
-            r, c = r - dr, c-dc
-            if (dr, dc) == (-1, 0):
-                dr, dc = 0, 1
-            elif (dr, dc) == (0, 1):
-                dr, dc = 1, 0
-            elif (dr, dc) == (1, 0):
-                dr, dc = 0, -1
-            elif (dr, dc) == (0, -1):
-                dr, dc = -1, 0
+            r += dr
+            c += dc
 
-
-    print(part1+len(patrol_map['X']))
+    print(len(patrol_map))
 
 
 if __name__ == '__main__':
